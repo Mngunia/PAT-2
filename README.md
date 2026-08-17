@@ -1,2 +1,0 @@
-# PAT-2
-SUBTASK 2

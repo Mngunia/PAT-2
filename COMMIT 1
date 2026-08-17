@@ -1,0 +1,200 @@
+
+include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+// =====================================================
+// FUNCTION 1: Decimal to Binary
+// Receives an integer and returns binary as a string
+// =====================================================
+string decimalToBinary(int decimal)
+{
+    if (decimal == 0)
+        return "0";
+
+    string binary = "";
+
+    while (decimal > 0)
+    {
+        binary = char((decimal % 2) + '0') + binary;
+        decimal = decimal / 2;
+    }
+
+    return binary;
+}
+
+// =====================================================
+// FUNCTION 2: Binary to Decimal
+// Receives a binary string and returns an integer
+// =====================================================
+int binaryToDecimal(string binary)
+{
+    int decimal = 0;
+
+    for (int i = 0; i < binary.length(); i++)
+    {
+        decimal = decimal * 2 + (binary[i] - '0');
+    }
+
+    return decimal;
+}
+
+// =====================================================
+// FUNCTION 3: Decimal to Hexadecimal
+// Receives an integer and returns hexadecimal as a string
+// =====================================================
+string decimalToHexadecimal(int decimal)
+{
+    if (decimal == 0)
+        return "0";
+
+    string hexadecimal = "";
+    string hexDigits = "0123456789ABCDEF";
+
+    while (decimal > 0)
+    {
+        int remainder = decimal % 16;
+        hexadecimal = hexDigits[remainder] + hexadecimal;
+        decimal = decimal / 16;
+    }
+
+    return hexadecimal;
+}
+
+// =====================================================
+// FUNCTION 4: Hexadecimal to Decimal
+// Receives a hexadecimal string and returns an integer
+// =====================================================
+int hexadecimalToDecimal(string hexadecimal)
+{
+    int decimal = 0;
+
+    for (int i = 0; i < hexadecimal.length(); i++)
+    {
+        char digit = hexadecimal[i];
+
+        int value;
+
+        if (digit >= '0' && digit <= '9')
+        {
+            value = digit - '0';
+        }
+        else if (digit >= 'A' && digit <= 'F')
+        {
+            value = digit - 'A' + 10;
+        }
+        else if (digit >= 'a' && digit <= 'f')
+        {
+            value = digit - 'a' + 10;
+        }
+        else
+        {
+            return -1;
+        }
+
+        decimal = decimal * 16 + value;
+    }
+
+    return decimal;
+}
+
+// =====================================================
+// MAIN PROGRAM
+// =====================================================
+int main()
+{
+    int choice;
+    int decimalNumber;
+    string binaryNumber;
+    string hexadecimalNumber;
+
+    // Seed random number generator
+    srand(time(0));
+
+    do
+    {
+        cout << "\n============================================\n";
+        cout << "              CONVERSION MENU\n";
+        cout << "============================================\n";
+        cout << "1. Convert Decimal to Binary\n";
+        cout << "2. Convert Binary to Decimal\n";
+        cout << "3. Convert Hexadecimal to Decimal\n";
+        cout << "4. Convert Decimal to Hexadecimal\n";
+        cout << "5. Demo (Generate and convert random integer to binary)\n";
+        cout << "6. Exit\n";
+        cout << "============================================\n";
+
+        cout << "Enter your choice (1-6): ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            // -----------------------------------------
+            // OPTION 1: Decimal to Binary
+            // -----------------------------------------
+            case 1:
+                cout << "Enter a decimal number: ";
+                cin >> decimalNumber;
+
+                cout << "Binary representation: "
+                     << decimalToBinary(decimalNumber)
+                     << endl;
+                break;
+
+            // -----------------------------------------
+            // OPTION 2: Binary to Decimal
+            // -----------------------------------------
+            case 2:
+                cout << "Enter a binary number: ";
+                cin >> binaryNumber;
+
+                cout << "Decimal representation: "
+                     << binaryToDecimal(binaryNumber)
+                     << endl;
+                break;
+
+            // -----------------------------------------
+            // OPTION 3: Hexadecimal to Decimal
+            // -----------------------------------------
+            case 3:
+                cout << "Enter a hexadecimal number: ";
+                cin >> hexadecimalNumber;
+
+                cout << "Decimal representation: "
+                     << hexadecimalToDecimal(hexadecimalNumber)
+                     << endl;
+                break;
+
+            // -----------------------------------------
+            // OPTION 4: Decimal to Hexadecimal
+            // -----------------------------------------
+            case 4:
+                cout << "Enter a decimal number: ";
+                cin >> decimalNumber;
+
+                cout << "Hexadecimal representation: "
+                     << decimalToHexadecimal(decimalNumber)
+                     << endl;
+                break;
+
+            // -----------------------------------------
+            // OPTION 5: Random Number Demo
+            // -----------------------------------------
+            case 5:
+            {
+                int randomNumber = rand() % 100;
+
+                cout << "Generated random integer: "
+                     << randomNumber << endl;
+
+                cout << "Binary representation: "
+                     << decimalToBinary(randomNumber)
+                     << endl;
+
+                break;
+            }
+
+            // -----------------------------------------
